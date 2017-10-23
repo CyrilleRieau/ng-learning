@@ -1,0 +1,9 @@
+<form (submit)="submit()" [formGroup]="formulaire">
+    <label>Nom :</label>
+    <input type="text" formControlName="nom" []>
+    <label>Prenom :</label>
+    <input type="text" formControlName="prenom">
+    <label>Age :</label>
+    <input type="number" formControlName="age">
+    <button>Go!</button>
+</form>

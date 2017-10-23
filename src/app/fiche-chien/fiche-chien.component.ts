@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Chien } from '../shared/chien';
 import { ActivatedRoute } from '@angular/router';
 import { ChienService } from '../shared/chien/chien.service';
+import 'rxjs/add/operator/mergeMap';
+import 'rxjs/add/operator/filter';
 
 @Component({
   selector: 'app-fiche-chien',
@@ -20,19 +22,11 @@ export class FicheChienComponent implements OnInit {
   ngOnInit() {
     //On peut récupérer les paramètres de l'url sous
     //forme d'un Observable depuis le ActivatedRoute
-    this.route.params
-    .subscribe((params) => {
-      //Si le params est de type number on fait l'appel
-      // au service
-      if(parseInt(params.id) !== NaN) {
-        this.chienService.getById(params.id)
-        .then((chien) => this.chien = chien)
-        //Si le service renvoie une erreur
-        .catch(() => this.chien = null);
-      }else {
-        this.chien = null
-      }
-    });
+    this.route.params.filter((params)=>parseInt(params.id) > 0 )
+    .mergeMap((params)=>
+    this.chienService.getById(params.id))
+    .subscribe((chien)=>this.chien = chien);
+   
     
 
   }

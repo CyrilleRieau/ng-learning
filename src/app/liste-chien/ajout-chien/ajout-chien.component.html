@@ -1,20 +1,21 @@
-
-
 <section>
     <h2>Ajouter le chien n°{{numeroChien}}</h2>
-    <p>
-      <label>Nom : </label>
-      <input type="text" [(ngModel)]="nouveauChien.nom" />
-    </p>
-    <p>
-        <label>Race : </label>
-      <input type="text" [(ngModel)]="nouveauChien.race" />
-    </p>
-    <p>
-        <label>Date de naissance : </label>
-      <input type="date" [(ngModel)]="nouveauChien.dateNaissance" />
-    </p>
-    <p>
-      <button (click)="ajouter()">Ajouter</button>
-    </p>
-  </section>
+
+    <form (submit)="ajouter()" [formGroup]="formulaire">
+        <p>
+            <label>Nom : </label>
+            <input type="text" formControlName="nom" />
+        </p>
+        <p>
+            <label>Race : </label>
+            <input type="text" formControlName="race" />
+        </p>
+        <p>
+            <label>Date de naissance : </label>
+            <input type="date" formControlName="dateNaissance" />
+        </p>
+        <p>
+            <button>Ajouter</button>
+        </p>
+    </form>
+</section>
